@@ -33,6 +33,9 @@ public class Pelicula extends ElemUn {
     public ElemUn getCopia(Condicion c) {
         if(c.cumple(this)) {
             Pelicula copia = new Pelicula(this.getTitulo(), this.getPuntaje(), this.getAnio(), this.getOscars());
+            for(Actor actor : actores) {
+                copia.actores.add(actor);
+            }
             return copia;
         }
         return null;

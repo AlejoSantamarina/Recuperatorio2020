@@ -5,6 +5,7 @@ public class Saga extends ElemUn {
 
     public Saga(String titulo) {
         super(titulo);
+        elementos = new ArrayList<>();
     }
 
     public double getPuntaje() {
@@ -39,15 +40,14 @@ public class Saga extends ElemUn {
     }
 
     public ElemUn getCopia(Condicion c) {
-        if(c.cumple(this)) {
-            Saga copia = new Saga(this.getTitulo());
-            copia.elementos.addAll(elementos);
-            if(!elementos.isEmpty()) {
-                ArrayList<ElemUn> copiaElementos = new ArrayList<>();
-                for(ElemUn elem : elementos) {
-                    ElemUn copiaElem = elem.getCopia(c);
-                }
+        Saga copia = new Saga(this.getTitulo());
+        for(ElemUn elem : elementos) {
+            ElemUn copiaElem = elem.getCopia(c);
+            if(copiaElem != null) {
+                copia.elementos.add(copiaElem);
             }
+        }
+        if(!copia.elementos.isEmpty()) {
             return copia;
         }
         return null;
